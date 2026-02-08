@@ -17,6 +17,8 @@ func forward_ore(ore: Ore) -> bool:
 	var machine := get_node_or_null(next_machine)
 	if machine == null:
 		return false
+	if machine is Conveyor and not (machine as Conveyor).can_accept_ore():
+		return false
 	if machine.has_method("get_input_position"):
 		ore.global_position = machine.get_input_position()
 		if ore.has_method("set_target_position"):

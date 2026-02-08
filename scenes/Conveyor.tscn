@@ -17,4 +17,4 @@ sprite_path = "res://sprites/conveyor_right.png"
 shape = SubResource("1")
 
 [node name="OutputPoint" type="Marker2D" parent="."]
-position = Vector2(32, 0)
+position = Vector2(0, 0)

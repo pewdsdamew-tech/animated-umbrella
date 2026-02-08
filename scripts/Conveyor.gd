@@ -24,13 +24,16 @@ func _physics_process(delta: float) -> void:
 		if not is_instance_valid(ore):
 			active_ores.remove_at(i)
 			continue
-		var target: Vector2 = ore.target_position
+		var can_forward := _can_forward()
+		if not can_forward:
+			ore.set_target_position(ore.global_position)
+			continue
+		var target: Vector2 = output_point.global_position
+		ore.set_target_position(target)
 		ore.global_position = ore.global_position.move_toward(target, speed * delta)
 		if ore.global_position.distance_to(target) <= output_epsilon:
 			if forward_ore(ore):
 				active_ores.remove_at(i)
-			else:
-				ore.set_target_position(output_point.global_position)
 
 
 func _on_input_area_body_entered(body: Node2D) -> void:
@@ -57,3 +60,14 @@ func receive_ore(ore: Ore) -> void:
 	ore.set_target_position(output_point.global_position)
 	if not active_ores.has(ore):
 		active_ores.append(ore)
+
+
+func _can_forward() -> bool:
+	if next_machine == NodePath():
+		return false
+	var machine := get_node_or_null(next_machine)
+	if machine == null:
+		return false
+	if machine is Conveyor:
+		return (machine as Conveyor).can_accept_ore()
+	return true
