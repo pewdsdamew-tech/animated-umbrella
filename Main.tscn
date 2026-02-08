@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://Main.gd" id=1]
+[ext_resource type="Script" path="res://GridFloor.gd" id=2]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1")
+
+[node name="Floor" type="Node2D" parent="."]
+script = ExtResource("2")
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="UI"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 240.0
+offset_bottom = 240.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Panel"]
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 212.0
+offset_bottom = 212.0
+theme_override_constants/separation = 8
+
+[node name="MoneyLabel" type="Label" parent="UI/Panel/VBoxContainer"]
+text = "Money: 0"
+
+[node name="SelectDropper" type="Button" parent="UI/Panel/VBoxContainer"]
+text = "Iron Mine"
+
+[node name="SelectConveyor" type="Button" parent="UI/Panel/VBoxContainer"]
+text = "Conveyor"
+
+[node name="SelectFurnace" type="Button" parent="UI/Panel/VBoxContainer"]
+text = "Furnace"
+
+[node name="SelectClear" type="Button" parent="UI/Panel/VBoxContainer"]
+text = "Cancel Placement"
+
+[connection signal="pressed" from="UI/Panel/VBoxContainer/SelectDropper" to="." method="_on_select_dropper_pressed"]
+[connection signal="pressed" from="UI/Panel/VBoxContainer/SelectConveyor" to="." method="_on_select_conveyor_pressed"]
+[connection signal="pressed" from="UI/Panel/VBoxContainer/SelectFurnace" to="." method="_on_select_furnace_pressed"]
+[connection signal="pressed" from="UI/Panel/VBoxContainer/SelectClear" to="." method="_on_select_clear_pressed"]
