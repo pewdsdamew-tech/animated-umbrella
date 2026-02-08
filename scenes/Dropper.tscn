@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/Dropper.gd" id=1]
+[ext_resource type="Texture2D" path="res://sprites/mine.png" id=2]
+
+[node name="Dropper" type="Node2D"]
+script = ExtResource("1")
+sprite_texture = ExtResource("2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2")
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(32, 0)
+
+[node name="Timer" type="Timer" parent="."]

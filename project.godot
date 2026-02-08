@@ -1,0 +1,13 @@
+[gd_project format=3]
+config_version=5
+
+[application]
+config/name="MinersHavenSimplified"
+run/main_scene="res://scenes/Main.tscn"
+
+[autoload]
+MoneyManager="*res://scripts/MoneyManager.gd"
+
+[display]
+window/size/viewport_width=1152
+window/size/viewport_height=648
