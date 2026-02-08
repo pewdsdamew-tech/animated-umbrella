@@ -21,15 +21,21 @@ func _ready() -> void:
 
 
 func _on_timer_timeout() -> void:
+	if next_machine == NodePath():
+		return
+	var machine := get_node_or_null(next_machine)
+	var conveyor := machine as Conveyor
+	if conveyor == null:
+		return
+	if not conveyor.can_accept_ore():
+		return
 	var ore := ore_scene.instantiate() as Ore
 	if ore == null:
 		return
 	ore.ore_type = ore_type
 	ore.base_value = base_value
 	ore.value = base_value
-	ore.global_position = spawn_point.global_position
+	var input_position := conveyor.get_input_position()
+	ore.global_position = input_position
 	get_tree().current_scene.add_child(ore)
-	if next_machine != NodePath():
-		var machine := get_node_or_null(next_machine)
-		if machine and machine.has_method("get_input_position"):
-			ore.set_target_position(machine.get_input_position())
+	conveyor.receive_ore(ore)
