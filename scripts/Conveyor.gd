@@ -1,7 +1,7 @@
 class_name Conveyor
 extends "res://scripts/Machine.gd"
 
-@export var speed: float = 100.0
+@export var speed: float = 32.0
 @export var sprite_path: String = ""
 
 @onready var input_area: Area2D = $InputArea
