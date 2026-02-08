@@ -1,0 +1,30 @@
+extends "res://Machine.gd"
+
+@export var ore_type: String = "Iron"
+@export var base_value: int = 1
+@export var spawn_interval: float = 1.0
+
+@onready var spawn_point: Marker2D = $SpawnPoint
+@onready var timer: Timer = $Timer
+
+var ore_scene: PackedScene = preload("res://Ore.tscn")
+
+
+func _ready() -> void:
+	timer.wait_time = spawn_interval
+	timer.timeout.connect(_on_timer_timeout)
+	timer.start()
+
+
+func _on_timer_timeout() -> void:
+	var ore := ore_scene.instantiate()
+	ore.ore_type = ore_type
+	ore.base_value = base_value
+	ore.value = base_value
+	ore.global_position = spawn_point.global_position
+	get_tree().current_scene.add_child(ore)
+	if next_machine != NodePath():
+		var machine := get_node_or_null(next_machine)
+		if machine and machine.has_method("get_input_position"):
+			ore.set_target_position(machine.get_input_position())
+
