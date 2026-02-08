@@ -1,17 +1,15 @@
 [gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/Ore.gd" id=1]
-[ext_resource type="Texture2D" path="res://sprites/iron_ore.png" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 8.0
 
 [node name="Ore" type="CharacterBody2D"]
 script = ExtResource("1")
-sprite_texture = ExtResource("2")
+sprite_path = "res://sprites/iron_ore.png"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("1")

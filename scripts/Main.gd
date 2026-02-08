@@ -46,14 +46,14 @@ func _place_at(world_position: Vector2) -> void:
 func _refresh_links() -> void:
 	for cell in grid_map.keys():
 		var node: Node2D = grid_map[cell]
-		if not node.has_variable("next_machine"):
+		if not (node is Machine):
 			continue
 		var next_cell: Vector2i = cell + Vector2i(1, 0)
 		if grid_map.has(next_cell):
 			var next_node: Node2D = grid_map[next_cell]
-			node.next_machine = node.get_path_to(next_node)
+			(node as Machine).next_machine = node.get_path_to(next_node)
 		else:
-			node.next_machine = NodePath()
+			(node as Machine).next_machine = NodePath()
 
 
 func _update_money_label() -> void:

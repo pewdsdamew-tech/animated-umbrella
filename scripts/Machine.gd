@@ -1,3 +1,4 @@
+class_name Machine
 extends Node2D
 
 @export var next_machine: NodePath

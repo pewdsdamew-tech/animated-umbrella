@@ -3,7 +3,7 @@ extends "res://scripts/Machine.gd"
 @export var ore_type: String = "Iron"
 @export var base_value: int = 1
 @export var spawn_interval: float = 1.0
-@export var sprite_texture: Texture2D
+@export var sprite_path: String = ""
 
 @onready var spawn_point: Marker2D = $SpawnPoint
 @onready var timer: Timer = $Timer
@@ -13,8 +13,8 @@ var ore_scene: PackedScene = preload("res://scenes/Ore.tscn")
 
 
 func _ready() -> void:
-	if sprite_texture:
-		sprite.texture = sprite_texture
+	if sprite_path != "" and ResourceLoader.exists(sprite_path):
+		sprite.texture = load(sprite_path)
 	timer.wait_time = spawn_interval
 	timer.timeout.connect(_on_timer_timeout)
 	timer.start()

@@ -5,7 +5,7 @@ extends CharacterBody2D
 @export var base_value: int = 1
 @export var value: int = 1
 @export var tags: Array[String] = []
-@export var sprite_texture: Texture2D
+@export var sprite_path: String = ""
 
 var target_position: Vector2 = Vector2.ZERO
 
@@ -15,8 +15,8 @@ var target_position: Vector2 = Vector2.ZERO
 func _ready() -> void:
 	add_to_group("ore")
 	value = base_value
-	if sprite_texture:
-		sprite.texture = sprite_texture
+	if sprite_path != "" and ResourceLoader.exists(sprite_path):
+		sprite.texture = load(sprite_path)
 
 
 func apply_multiplier(mult: float) -> void:

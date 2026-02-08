@@ -1,14 +1,14 @@
 extends "res://scripts/Machine.gd"
 
-@export var sprite_texture: Texture2D
+@export var sprite_path: String = ""
 
 @onready var input_area: Area2D = $InputArea
 @onready var sprite: Sprite2D = $Sprite2D
 
 
 func _ready() -> void:
-	if sprite_texture:
-		sprite.texture = sprite_texture
+	if sprite_path != "" and ResourceLoader.exists(sprite_path):
+		sprite.texture = load(sprite_path)
 	input_area.body_entered.connect(_on_input_area_body_entered)
 
 
